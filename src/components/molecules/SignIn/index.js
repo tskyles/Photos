@@ -20,7 +20,6 @@ function SignIn(props){
             css={`
               width: 125px;
               height: 20px;
-              margin-right: 2.5px;
               padding-left: 5px;
             `}
           />
@@ -32,13 +31,13 @@ function SignIn(props){
             css={`
               width: 125px;
               height: 20px;
-              margin-left: 2.5px;
+              margin-left: 10px;
               padding-left: 5px;
             `}
           />
           <Button css={`
             height: 20px;
-            margin-left: 5px;
+            margin-left: 10px;
             font-weight: bold;
           `}>LOGIN</Button>
         </Flexbox>
