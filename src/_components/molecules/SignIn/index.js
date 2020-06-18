@@ -1,6 +1,6 @@
 import { default as React } from 'react';
 import 'styled-components/macro';
-import { Button, Flexbox, Input } from '../../';
+import { Button, Flexbox, Input } from '../..';
 
 function SignIn(props){
 

@@ -1,6 +1,6 @@
 const round = number => Math.round(number * 100) / 100
 
-const monitorReducerEnhancer = createStore => (
+export const monitorReducerEnhancer = createStore => (
   reducer,
   initialState,
   enhancer
@@ -18,5 +18,3 @@ const monitorReducerEnhancer = createStore => (
 
   return createStore(monitoredReducer, initialState, enhancer)
 }
-
-export default monitorReducerEnhancer

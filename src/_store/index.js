@@ -1,8 +1,8 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import monitorReducerEnhancer from '../enhancers/monitorReducer';
-import loggerMiddleware from '../middleware/logger';
-import rootReducer from './reducers';
+import {monitorReducerEnhancer} from '../enhancers';
+import {logger as loggerMiddleware} from '../middleware';
+import rootReducer from '../_reducers';
 
 
 export default function configureStore(preloadedState){

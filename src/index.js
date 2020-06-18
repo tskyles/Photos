@@ -4,15 +4,20 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './pages/app/App';
 import * as serviceWorker from './serviceWorker';
-import configureStore from './store';
+import configureStore from './_store';
+import { BrowserRouter } from 'react-router-dom';
+
+require('dotenv').config();
 
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
