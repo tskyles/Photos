@@ -17,7 +17,7 @@ function login(email, password){
       .then(
         user => {
           dispatch(success(user));
-          history.push('/');
+          // history.push('/');
         },
         error => {
           dispatch(failure(error.toString()));
@@ -36,15 +36,15 @@ function logout(){
   return {type: userConstants.LOGOUT};
 }
 
-function register(email, password){
+function register(userData){
   return dispatch => {
-    dispatch(request(email));
+    dispatch(request(userData.email));
 
-    userService.register(email, password)
+    userService.register(userData)
       .then(
         user => {
           dispatch(success());
-          history.push('/login');
+          // history.push('/login');
           dispatch(alertActions.success('Registration Successful'));
         },
         error => {
@@ -54,7 +54,7 @@ function register(email, password){
       )
   }
 
-  function request(user) { return { type: userConstants.REGISTRATION_REQUEST, user } };
-  function success(user) { return { type: userConstants.REGISTRATION_SUCCESS, user } };
-  function failure(user) { return { type: userConstants.REGISTRATION_FAILURE, user } };
+  function request(user) { return { type: userConstants.REGISTER_REQUEST, user } };
+  function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } };
+  function failure(user) { return { type: userConstants.REGISTER_FAILURE, user } };
 }

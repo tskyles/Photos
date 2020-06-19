@@ -4,10 +4,7 @@ import cookie from 'react-cookies';
 import { userConstants } from '../_constants';
 
 const token = cookie.load('user', );
-console.log('token', token);
 const user = token ? jwt.verify(token, process.env.REACT_APP_SECRET) : null;
-console.log('user', user);
-// let initialState = user ? user : {};
 
 const initialState = (user) => {
   if (user) {

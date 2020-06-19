@@ -27,18 +27,21 @@ function login(email, password){
 
 // remove user from local storage and logout
 function logout(){
-  localStorage.removeItem('user');
+  cookie.remove('user');
 }
 
-function register(user){
+function register(userData){
+  console.log(userData);
   const requestOptions = {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
+    body: JSON.stringify(userData),
   };
 
-  return fetch(`${process.env.BACKEND_URI}/register`, requestOptions)
+  return fetch(`${process.env.REACT_APP_BACKEND_URI}/register`, requestOptions)
     .then(handleResponse);
 }
 
@@ -46,7 +49,9 @@ function register(user){
 function handleResponse(response){
   return response.text()
     .then(text => {
+      console.log(text)
       const data = text && JSON.parse(text);
+      console.log(data);
       if(!response.ok){
         if(response.status === 401){
           logout();
