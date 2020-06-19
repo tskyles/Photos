@@ -7,8 +7,6 @@ export const userActions = {
   login,
   logout,
   register,
-  getAll,
-  delete: _delete,
 }
 
 function login(email, password){
@@ -40,7 +38,7 @@ function logout(){
 
 function register(email, password){
   return dispatch => {
-    dispatch(request(user));
+    dispatch(request(email));
 
     userService.register(email, password)
       .then(

@@ -1,22 +1,48 @@
-import { default as React } from 'react';
+import { default as React, useState, useEffect } from 'react';
 import 'styled-components/macro';
-import { Button, Flexbox, Input } from '../..';
+import { Button, Flexbox, Input, Label, ErrorText } from '../..';
+import { useDispatch, useSelector } from 'react-redux';
+import { userActions } from '../../../_actions';
+import { If, Then, Else } from '../../util/conditionals'
 
 function SignIn(props){
+  const [inputs, setInputs] = useState({
+    email: '',
+    password: '',
+  })
+  const [submitted, setSubmitted] = useState(false);
+  const {email, password} = inputs;
+  // const loggingIn = useSelector(state => state.authentication.loggingIn);
+  const dispatch = useDispatch();
 
-  function handleFormSubmit(){}
-  function handleInputChange(){}
+  useEffect(() => {
+    dispatch(userActions.logout());
+  }, [dispatch]);
 
+  function handleFormSubmit(e){
+    e.preventDefault();
+    setSubmitted(true);
+    if(email && password){
+      dispatch(userActions.login(email, password));
+    }
+  }
+
+  function handleInputChange(e){
+    if(submitted) setSubmitted(false);
+    const {name, value} = e.target;
+    setInputs(inputs => ({...inputs, [name]: value}));
+  }
 
   return (
     <>
-      <form onSubmit={handleFormSubmit}>
+      <form name='form' onSubmit={handleFormSubmit} css={``}>
         <Flexbox>
           <Input
             placeholder="email"
             name="email"
             onChange={handleInputChange}
             type='email'
+            value={email}
             css={`
               width: 125px;
               height: 20px;
@@ -28,6 +54,7 @@ function SignIn(props){
             name="password"
             onChange={handleInputChange}
             type='password'
+            value={password}
             css={`
               width: 125px;
               height: 20px;
@@ -35,11 +62,54 @@ function SignIn(props){
               padding-left: 5px;
             `}
           />
-          <Button css={`
-            height: 20px;
-            margin-left: 10px;
-            font-weight: bold;
-          `}>LOGIN</Button>
+          <Button 
+            css={`
+              height: 20px;
+              margin-left: 10px;
+              font-weight: bold;
+            `}
+          >LOGIN</Button>
+        </Flexbox>
+
+        <Flexbox css={`position: absolute;`}>
+          <If condition={submitted && (!email || !password)}>
+            <Then>
+              <If condition={submitted && (!email && !password)}>
+                <Then>
+                  <ErrorText css={`margin-left: 5px;`}>email and password are required</ErrorText>
+                </Then>
+              </If>
+              <If condition={submitted && (!email && password)}>
+                <Then>
+                  <ErrorText css={`margin-left: 5px;`}>email is required</ErrorText>
+                </Then>
+              </If>
+              <If condition={submitted && (email && !password)}>
+                <Then>
+                  <ErrorText css={`margin-left: 5px;`}>password is required</ErrorText>
+                </Then>
+              </If>
+            </Then>
+          </If>
+          {/* <If condtion={submitted && !email && !password}>
+            <Then>
+              <ErrorText css={`margin-left: 5px;`}>email and password are required</ErrorText>
+              {console.log((submitted && !email && !password))}
+
+            </Then>
+            <Else>
+              <If condition={submitted && !email}>
+                <Then>
+                  <ErrorText css={`margin-left: 5px;`}>email is required</ErrorText>
+                </Then>
+              </If>
+              <If condition={submitted && !password}>
+                <Then>
+                  <ErrorText css={`margin-left: 5px;`}>password is required</ErrorText>
+                </Then>
+              </If>
+            </Else>
+          </If> */}
         </Flexbox>
       </form>
     </>

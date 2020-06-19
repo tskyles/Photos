@@ -1,7 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import {monitorReducerEnhancer} from '../enhancers';
-import {logger as loggerMiddleware} from '../middleware';
+import {monitorReducerEnhancer} from '../_enhancers';
+import {logger as loggerMiddleware} from '../_middleware';
 import rootReducer from '../_reducers';
 
 

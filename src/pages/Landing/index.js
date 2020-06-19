@@ -1,6 +1,6 @@
 import React from 'react';
 import 'styled-components/macro';
-import { Flexbox, SignIn, SignUp } from '../../components';
+import { Flexbox, SignIn, SignUp } from '../../_components';
 
 function Landing(props){
 
