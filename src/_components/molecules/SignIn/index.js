@@ -91,25 +91,7 @@ function SignIn(props){
               </If>
             </Then>
           </If>
-          {/* <If condtion={submitted && !email && !password}>
-            <Then>
-              <ErrorText css={`margin-left: 5px;`}>email and password are required</ErrorText>
-              {console.log((submitted && !email && !password))}
-
-            </Then>
-            <Else>
-              <If condition={submitted && !email}>
-                <Then>
-                  <ErrorText css={`margin-left: 5px;`}>email is required</ErrorText>
-                </Then>
-              </If>
-              <If condition={submitted && !password}>
-                <Then>
-                  <ErrorText css={`margin-left: 5px;`}>password is required</ErrorText>
-                </Then>
-              </If>
-            </Else>
-          </If> */}
+          
         </Flexbox>
       </form>
     </>
