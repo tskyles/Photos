@@ -1,22 +1,23 @@
 
 // login in user
 function login(email, password){
+  const encodedCreds = btoa(`${email}:${password}`);
   const requestOptions = {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      "Authorization": `Basic ${encodedCreds}`,
     },
-    body: JSON.stringify({
-      email,
-      password
-    })
+    body: undefined,
   };
-
-  return fetch(`${process.env.API_URI_LOCAL}/signin`, requestOptions)
+ 
+  return fetch(`${process.env.REACT_APP_BACKEND_URI}/signin`, requestOptions)
     .then(handleResponse)
     .then(user => {
+      console.log(user);
       // store user details and JWT in local storage to allow user to stay logged in between pages
-      localStorage.setItem('user', JSON.stringify(user));
+      // localStorage.setItem('user', JSON.stringify(user));
       return user
     })
     .catch(e => console.error(e));

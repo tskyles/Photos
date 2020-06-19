@@ -1,9 +1,9 @@
 import { default as React, useState, useEffect } from 'react';
 import 'styled-components/macro';
-import { Button, Flexbox, Input, Label, ErrorText } from '../..';
+import { Button, Flexbox, Input, ErrorText } from '../..';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../../_actions';
-import { If, Then, Else } from '../../util/conditionals'
+import { If, Then } from '../../util/conditionals'
 
 function SignIn(props){
   const [inputs, setInputs] = useState({
@@ -91,7 +91,7 @@ function SignIn(props){
               </If>
             </Then>
           </If>
-          
+
         </Flexbox>
       </form>
     </>

@@ -7,8 +7,6 @@ import * as serviceWorker from './serviceWorker';
 import configureStore from './_store';
 import { BrowserRouter } from 'react-router-dom';
 
-require('dotenv').config();
-
 const store = configureStore();
 
 ReactDOM.render(
