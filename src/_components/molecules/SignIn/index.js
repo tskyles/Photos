@@ -3,7 +3,7 @@ import 'styled-components/macro';
 import { Button, Flexbox, Input, ErrorText } from '../..';
 import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../../_actions';
-import { If, Then } from '../../util/conditionals'
+import { If, Then } from '../../util'
 
 function SignIn(props){
   const [inputs, setInputs] = useState({

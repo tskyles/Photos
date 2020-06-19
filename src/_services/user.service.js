@@ -1,3 +1,4 @@
+import cookie from 'react-cookies';
 
 // login in user
 function login(email, password){
@@ -7,7 +8,7 @@ function login(email, password){
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      "Authorization": `Basic ${encodedCreds}`,
+      'Authorization': `Basic ${encodedCreds}`,
     },
     body: undefined,
   };
@@ -15,10 +16,11 @@ function login(email, password){
   return fetch(`${process.env.REACT_APP_BACKEND_URI}/signin`, requestOptions)
     .then(handleResponse)
     .then(user => {
-      console.log(user);
-      // store user details and JWT in local storage to allow user to stay logged in between pages
-      // localStorage.setItem('user', JSON.stringify(user));
-      return user
+      cookie.save('user', user.token, {
+        path: '/',
+        maxAge: 31556952
+      });
+      return user.user;
     })
     .catch(e => console.error(e));
 };
