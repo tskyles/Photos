@@ -1,5 +1,10 @@
 import cookie from 'react-cookies';
 
+export const userService = {
+  login,
+  logout,
+  register,
+}
 // login in user
 function login(type, creds){
   switch(type.toLowerCase()){
@@ -74,10 +79,4 @@ function handleResponse(response){
       }
       return data;
     })
-}
-
-export const userService = {
-  login,
-  logout,
-  register,
 }

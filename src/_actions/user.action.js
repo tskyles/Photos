@@ -9,11 +9,13 @@ export const userActions = {
   register,
 }
 
-function login(email, password){
-  return dispatch => {
-    dispatch(request({email}));
+function login(type, input){
 
-    userService.login(email, password)
+  return dispatch => {
+    if (input.email) dispatch(request(input.email));
+    else dispatch(request({ input }));
+
+    userService.login(type, input)
       .then(
         user => {
           dispatch(success(user));
