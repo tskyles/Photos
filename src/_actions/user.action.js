@@ -16,6 +16,7 @@ function login(type, input){
     userService.login(type, input)
       .then(
         user => {
+          console.log('action', user);
           dispatch(success(user));
         },
         error => {

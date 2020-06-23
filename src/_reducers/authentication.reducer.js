@@ -10,7 +10,8 @@ const initialState = (user) => {
   if (user) {
     return {
       loggedIn: true,
-      user: user
+      user: user,
+      token: token,
     }
   }
   else {
@@ -29,7 +30,8 @@ export function authentication(state = initialState(user), action){
     case userConstants.LOGIN_SUCCESS:
       return {
         loggedIn: true,
-        user: action.user
+        user: action.user.user,
+        token: action.user.token
       };
     case userConstants.LOGIN_FAILURE:
       return {};

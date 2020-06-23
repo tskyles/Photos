@@ -8,7 +8,6 @@ function Home(props){
   const dispatch = useDispatch();
 
   const user = useSelector(state => state.authentication.user);
-  console.log(user)
 
   function handleSubmit(e) {
     e.preventDefault();

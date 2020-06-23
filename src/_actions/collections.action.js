@@ -12,12 +12,16 @@ function createCollection(collectionData, bearerToken){
 
     collectionsService.createCollection(collectionData, bearerToken)
       .then(
-        collection => dispatch(success(collection)),
-        error => {
-          dispatch(failure(error.toString()));
-          dispatch(alertActions.error(error.toString()));
+        collection => {
+          console.log('collection', collection)
+          dispatch(success(collection))
         }
       )
+      .catch(error => {
+        console.log('error', error);
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      })
   }
 
   function request(collection) { return { type: collectionsConstants.CREATE_REQUEST, collection } };

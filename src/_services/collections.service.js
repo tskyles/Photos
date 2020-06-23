@@ -12,11 +12,13 @@ function createCollection(collectionData, bearerToken){
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${bearerToken}`,
     },
-    body: collectionData,
+    body: JSON.stringify(collectionData),
   };
-
+  console.log(collectionData, bearerToken, requestOptions.headers)
   return fetch(`${process.env.REACT_APP_BACKEND_URI}/collections`, requestOptions)
     .then(handleResponse)
     .then(collection => collection)
-    .catch(e => console.error(e));
+    .catch(error => {
+      return Promise.reject(error);
+    });
 }

@@ -38,9 +38,12 @@ function login(type, creds){
         path: '/',
         maxAge: 31556952
       });
-      return user.user;
+      return user;
     })
-    .catch(e => console.error(e));
+    .catch(error => {
+      console.error(error)
+      return Promise.reject(error);
+    });
 };
 
 // remove user from local storage and logout
@@ -60,7 +63,11 @@ function register(userData){
   };
 
   return fetch(`${process.env.REACT_APP_BACKEND_URI}/register`, requestOptions)
-    .then(handleResponse);
+    .then(handleResponse)
+    .catch(error => {
+      console.error(error)
+      return Promise.reject(error);
+    });
 }
 
 
