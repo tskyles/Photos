@@ -1,10 +1,10 @@
 import { handleResponse } from '../_helpers';
 
-export const collectionService = {
+export const collectionsService = {
   createCollection,
 }
 
-function createCollection(collectionName, userID, bearerToken){
+function createCollection(collectionData, bearerToken){
   const requestOptions = {
     method: 'POST',
     headers: {
@@ -12,7 +12,7 @@ function createCollection(collectionName, userID, bearerToken){
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${bearerToken}`,
     },
-    body: {created_by: userID, name: collectionName},
+    body: collectionData,
   };
 
   return fetch(`${process.env.REACT_APP_BACKEND_URI}/collections`, requestOptions)

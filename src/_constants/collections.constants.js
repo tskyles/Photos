@@ -1,4 +1,4 @@
-export const collectionConstants = {
+export const collectionsConstants = {
   CREATE_REQUEST: 'COLLECTION_CREATE_REQUEST',
   CREATE_SUCCESS: 'COLLECTION_CREATE_SUCCESS',
   CREATE_FAILURE: 'COLLECTION_CREATE_FAILURE',
