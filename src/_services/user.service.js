@@ -1,19 +1,31 @@
 import cookie from 'react-cookies';
 
 // login in user
-function login(email, password){
-  const encodedCreds = btoa(`${email}:${password}`);
+function login(type, creds){
+  switch(type.toLowerCase()){
+    case 'basic':
+      type = 'Basic'
+      const {email, password} = creds;
+      creds = btoa(`${email}:${password}`);
+      break;
+    case 'bearer':
+      type = 'Bearer';
+      break;
+    default:
+      return console.error('Invalid request type')
+  }
+  
   const requestOptions = {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Basic ${encodedCreds}`,
+      'Authorization': `${type} ${creds}`,
     },
     body: undefined,
   };
- 
-  return fetch(`${process.env.REACT_APP_BACKEND_URI}/signin`, requestOptions)
+
+  return fetch(`${process.env.REACT_APP_BACKEND_URI}/signin/${type.toLowerCase()}`, requestOptions)
     .then(handleResponse)
     .then(user => {
       cookie.save('user', user.token, {
@@ -44,6 +56,7 @@ function register(userData){
   return fetch(`${process.env.REACT_APP_BACKEND_URI}/register`, requestOptions)
     .then(handleResponse);
 }
+
 
 
 function handleResponse(response){

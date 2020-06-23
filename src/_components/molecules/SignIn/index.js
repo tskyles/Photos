@@ -23,7 +23,7 @@ function SignIn(props){
     e.preventDefault();
     setSubmitted(true);
     if(email && password){
-      dispatch(userActions.login(email, password));
+      dispatch(userActions.login('basic', inputs));
     }
   }
 
