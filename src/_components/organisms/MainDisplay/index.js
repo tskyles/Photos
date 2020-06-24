@@ -16,7 +16,7 @@ function MainDisplay(props){
       width: 50%;
       margin: auto;
       // margin-top: 10%;
-      height: 800px;`}>
+      height: 1800px;`}>
       <Flexbox css={`
         position: relative;
         top: 10vh;
