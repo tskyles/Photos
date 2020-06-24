@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
 import { userActions } from '../../_actions';
-import { Flexbox, Button, CollectionsSidebar } from '../../_components';
+import { Flexbox, Button, CollectionsSidebar, MainDisplay } from '../../_components';
 import { collectionsActions } from '../../_actions';
 
 function Home(props){
@@ -23,8 +23,13 @@ function Home(props){
   return(
     <>
       <Flexbox css={`
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 999;
         background-color: #ffffff;
-        height: 10vh;
+        height: 7.5%;
+        width: 100%;
         justify-content: flex-end;
         padding: 0 25%;
       `}>
@@ -32,27 +37,39 @@ function Home(props){
           margin-right: auto;
         `}>Photos</h1>
 
-        <Button onClick={handleSubmit}>LOGOUT</Button>
+        <Button css={`margin-right: 50%`} onClick={handleSubmit}>LOGOUT</Button>
       </Flexbox>
 
-      <Flexbox css={`
+      {/* <Flexbox css={`
         // justify-content: space-between;
         align-items: flex-start;
-        height: 80vh;
-        padding: 2.5% 20%;
-      `}>
-        <div css={`background-color: #d1d1d1; width: 100%; height: 100%;`}>
-          <CollectionsSidebar />
-        </div>
-      </Flexbox>
+        height: 90%;
+      `}> */}
+      
+      {/* <Flexbox css={`
+        // position: fixed;
+        // left: 50%;
+        // position: relative;
+        // transform: translateXY-15%);
+        // background-color: #282c34;
 
-      <Flexbox css={`
+        margin: auto;
+        width: 50%;
+        height: 100%;
+        align-items: flex-start;
+        padding: 0 2.5% 2.5%;`}> */}
+        <CollectionsSidebar />
+        <MainDisplay />
+        {/* </Flexbox> */}
+      {/* </Flexbox> */}
+
+      {/* <Flexbox css={`
         background-color: #ffffff;
         height: 10vh;
         justify-content: flex-end;
         padding: 0 25%;
       `}>
-      </Flexbox>
+      </Flexbox> */}
     </>
   )
 }

@@ -50,49 +50,52 @@ function CollectionsSidebar(props){
 
   return (
     <Flexbox css={`
+      position: fixed;
+      left: 0;
+      top: 10vh;
+      z-index: 999;
       flex-direction: column;
-      width: 25%;
+      width: 24%;
       justify-content: flex-start;
-      align-items: flex-start;
+      align-items: flex-end;
     `}>
-      <h3>My Collections</h3>
-      <Flexbox css={`flex-direction: column`}>
+      <Flexbox css={`flex-direction: column;       background-color: #ffffff;`}>
+        <h3>My Collections</h3>
         <SideBarMenu />
-      </Flexbox>
-      <PlusButton onClick={handleClick} text='Create New'/>
-      <If condition={createCollection}>
-        <Then>
-          <form onSubmit={handleFormSubmit}>
-            <Flexbox css={`
+        <PlusButton onClick={handleClick} text='Create New' />
+        <If condition={createCollection}>
+          <Then>
+            <form onSubmit={handleFormSubmit}>
+              <Flexbox css={`
             flex-direction: column;
             align-items: flex-start;
             `}>
-              <Input
-                placeholder='Name'
-                name='name'
-                onChange={handleInputChange}
-                type='text'
-                value={name}
-                css={``} />
-              <label>
-                Private?
                 <Input
-                  name='privateView'
-                  type='checkbox'
-                  checked={checked}
-                  onChange={handleCheckbox}
+                  placeholder='Name'
+                  name='name'
+                  onChange={handleInputChange}
+                  type='text'
+                  value={name}
                   css={``} />
-              </label>
-              <Button css={`
+                <label>
+                  Private?
+                <Input
+                    name='privateView'
+                    type='checkbox'
+                    checked={checked}
+                    onChange={handleCheckbox}
+                    css={``} />
+                </label>
+                <Button css={`
                 width: 100px;
                 height: 30px;
                 font-weight: bold;
               `}>CREATE</Button>
-            </Flexbox>
-          </form>
-        </Then>
-      </If>
-
+              </Flexbox>
+            </form>
+          </Then>
+        </If>
+      </Flexbox>
     </Flexbox>
   )
 }
