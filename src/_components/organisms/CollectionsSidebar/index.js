@@ -1,6 +1,6 @@
 import 'styled-components/macro';
 import React, {useState} from 'react';
-import { Flexbox, PlusButton, Input, Button, List } from '../..';
+import { Flexbox, PlusButton, Input, Button, SideBarMenu } from '../..';
 import { If, Then } from '../../util';
 import { useDispatch, useSelector } from 'react-redux';
 import { collectionsActions } from '../../../_actions';
@@ -57,7 +57,7 @@ function CollectionsSidebar(props){
     `}>
       <h3>My Collections</h3>
       <Flexbox css={`flex-direction: column`}>
-        <List />
+        <SideBarMenu />
       </Flexbox>
       <PlusButton onClick={handleClick} text='Create New'/>
       <If condition={createCollection}>

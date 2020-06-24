@@ -22,7 +22,7 @@ export function collections(state = initialState, action){
     case collectionsConstants.CREATE_FAILURE:
       return {...state};
 
-      
+
     case collectionsConstants.GET_ALL_REQUEST:
       return {
         ...state,
