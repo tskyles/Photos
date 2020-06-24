@@ -1,21 +1,43 @@
-import { collectionsConstant } from '../_constants';
+import { collectionsConstants } from '../_constants';
 
-export function collections(state = {}, action){
+const initialState = {
+  collections: [],
+}
+
+export function collections(state = initialState, action){
   switch(action.type){
-    case collectionsConstant.CREATE_REQUEST:
+    case collectionsConstants.CREATE_REQUEST:
       return {
+        ...state,
         creatingCollection: true,
-
+        createdCollection: false,
       };
-    case collectionsConstant.CREATE_SUCCESS:
+    case collectionsConstants.CREATE_SUCCESS:
       return {
+        ...state,
+        creatingCollection: false,
         createdCollection: true,
         collections: [...state.collections, action.collection],
        };
-    case collectionsConstant.CREATE_FAILURE:
+    case collectionsConstants.CREATE_FAILURE:
+      return {...state};
+
+      
+    case collectionsConstants.GET_ALL_REQUEST:
       return {
-        collections: [...state.collections, action.collection],
+        ...state,
+        fetchingCollections: true,
+        fetchedCollections: false,
       };
+    case collectionsConstants.GET_ALL_SUCCESS:
+      return {
+        ...state,
+        fetchingCollections: false,
+        fetchedCollections: true,
+        collections: action.collections,
+      };
+    case collectionsConstants.GET_ALL_FAILURE:
+      return {...state};
     default:
        return state;
   }

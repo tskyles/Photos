@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import 'styled-components/macro';
 import { useSelector, useDispatch } from 'react-redux';
 import { userActions } from '../../_actions';
 import { Flexbox, Button, CollectionsSidebar } from '../../_components';
+import { collectionsActions } from '../../_actions';
 
 function Home(props){
   const dispatch = useDispatch();
 
-  const user = useSelector(state => state.authentication.user);
+  const token = useSelector(state => state.authentication.token);
+  const user_id = useSelector(state => state.authentication.user._id);
+
+  useEffect(() => {
+    dispatch(collectionsActions.getCollections(user_id, token));
+  })
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('logout')
     dispatch(userActions.logout());
   }
 
