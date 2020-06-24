@@ -7,20 +7,14 @@ import { collectionsActions } from '../../../_actions';
 
 function CollectionsSidebar(props){
   const dispatch = useDispatch();
+
   const token = useSelector(state => state.authentication.token);
   const user_id = useSelector(state => state.authentication.user._id);
 
-  const [inputs, setInputs] = useState({
-    name: '',
-    private_only: true,
-    created_by: user_id,
-    // create additional input to add to the users field
-    users: [user_id]
-  })
-  const {name, private_only} = inputs;
   const [submitted, setSubmitted] = useState(false);
-  const [collections, setCollections] = [];
   const [createCollection, setCreateCollection] = useState(false);
+  const [checked, setChecked] = useState(true);
+  const [name, setName] = useState('')
 
   function handleClick(e){
     e.preventDefault();
@@ -28,18 +22,30 @@ function CollectionsSidebar(props){
   }
 
   function handleInputChange(e){
-    if (submitted) setSubmitted(false);
-    const { name, value } = e.target;
-    setInputs(inputs => ({ ...inputs, [name]: value }));
+    if(submitted) setSubmitted(false);
+    setName(e.target.value);
   }
 
   function handleFormSubmit(e){
     e.preventDefault();
     setSubmitted(true);
-    if (Object.values(inputs).every(Boolean)) {
-      console.log(inputs, props.token);
-      dispatch(collectionsActions.createCollection(inputs, token))
+
+    const data = {
+      name: name,
+      private_only: true,
+      created_by: user_id,
+      // create additional input to add to the users field
+      users: [user_id]
     }
+
+    if (data.name){
+      dispatch(collectionsActions.createCollection(data, token))
+      setCreateCollection(false);
+    }
+  }
+
+  function handleCheckbox(){
+    setChecked(!checked);
   }
 
   return (
@@ -65,15 +71,15 @@ function CollectionsSidebar(props){
                 type='text'
                 value={name}
                 css={``} />
-              <div>
+              <label>
                 Private?
                 <Input
                   name='privateView'
-                  onChange={handleInputChange}
                   type='checkbox'
-                  checked={private_only}
+                  checked={checked}
+                  onChange={handleCheckbox}
                   css={``} />
-              </div>
+              </label>
               <Button css={`
                 width: 100px;
                 height: 30px;

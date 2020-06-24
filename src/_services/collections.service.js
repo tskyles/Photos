@@ -14,7 +14,7 @@ function createCollection(collectionData, bearerToken){
     },
     body: JSON.stringify(collectionData),
   };
-  console.log(collectionData, bearerToken, requestOptions.headers)
+
   return fetch(`${process.env.REACT_APP_BACKEND_URI}/collections`, requestOptions)
     .then(handleResponse)
     .then(collection => collection)
