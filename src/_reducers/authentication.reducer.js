@@ -7,7 +7,6 @@ const initialState = {
 
 
 export function authentication(state = initialState, action){
-  console.log(action);
   switch(action.type){
     case userConstants.LOGIN_REQUEST:
       return {
@@ -20,30 +19,12 @@ export function authentication(state = initialState, action){
         loggingIn: false,
         loggedIn: true,
         user: action.user,
-        // token: action.user.token
       };
     case userConstants.LOGIN_FAILURE:
       return {
         loggingIn: false,
         loggedIn: false,
       };
-
-
-    case userConstants.LOADING_CREDENTIALS_REQUEST:
-      return {
-        loadingCredentials: true,
-        loadedCredentials: false,
-      }
-    case userConstants.LOADING_CREDENTIALS_SUCCESS:
-      return {
-        loadingCredentials: false,
-        loadedCredentials: true,
-      }
-    case userConstants.LOADING_CREDENTIALS_FAILURE:
-      return {
-        loadingCredentials: false,
-        loadedCredentials: false,
-      }
 
 
     case userConstants.LOGOUT:
