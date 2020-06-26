@@ -1,48 +1,34 @@
 import React, { useEffect } from 'react';
 import Landing from '../Landing';
 import './App.css';
-import { useSelector } from 'react-redux';
-import {If, Then, Else} from '../../_components/util';
+import { useSelector, useDispatch } from 'react-redux';
+import {If, Then, Else, When} from '../../_components/util';
 import Home from '../Home';
 import { Route } from 'react-router-dom';
+import { handleResponse } from '../../_helpers';
+import { userActions } from '../../_actions';
 
 function App() {
-  const loggedIn = useSelector(state => state.authentication.loggedIn);
+  const dispatch = useDispatch();
 
-  function checkLoggedIn() {
-    return fetch(`${process.env.REACT_APP_BACKEND_URI}/signin`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: undefined,
-    })
-      .then(response => {
-        console.log(response);
-      })
-  }
+  const auth = useSelector(state => state.authentication);
+  const user = useSelector(state => state.authentication.user)
+
 
   useEffect(() => {
-    console.log('got here');
-    console.log('cookies', document.cookie)
-
-    checkLoggedIn();
-  })
+    dispatch(userActions.checkIfLoggedIn());
+  }, [dispatch])
 
 
   return (
     <Route path='/' exact={true}>
       <div className="App">
-        <If condition={loggedIn}>
-          <Then>
-            <Home />
-          </Then>
-          <Else>
-            <Landing />
-          </Else>
-        </If>
+        <When condition={!auth.loggingIn && auth.loggedIn}>
+          <Home />
+        </When>
+        <When condition={(!auth.loggingIn && !auth.loggedIn) || (auth.loggingIn && !auth.loggedIn)}>
+          <Landing />
+        </When>
       </div>
     </Route>
   );

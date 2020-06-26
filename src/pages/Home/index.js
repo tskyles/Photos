@@ -13,7 +13,6 @@ function Home(props){
 
   useEffect(() => {
     dispatch(collectionsActions.getCollections(user_id, token));
-    console.log(document.cookie)
   })
 
   function handleSubmit(e) {

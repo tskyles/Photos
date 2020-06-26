@@ -4,6 +4,7 @@ import {handleResponse} from '../_helpers';
 export const userService = {
   login,
   logout,
+  checkIfLoggedIn,
   register,
 }
 // login in user
@@ -49,7 +50,37 @@ function login(type, creds){
 
 // remove user from local storage and logout
 function logout(){
-  cookie.remove('user');
+  return fetch(`${ process.env.REACT_APP_BACKEND_URI }/logout`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: undefined,
+  })
+    // .then(handleResponse)
+    .then(response => {
+      console.log(response);
+      return response;
+  })
+}
+
+function checkIfLoggedIn() {
+  return fetch(`${process.env.REACT_APP_BACKEND_URI}/signin`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: undefined,
+  })
+    .then(handleResponse)
+    .then(response => {
+      console.log(response);
+      return response;
+    })
 }
 
 function register(userData){

@@ -20,7 +20,7 @@ function SignUp(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(userActions.logout());
+    // dispatch(userActions.logout());
   }, [dispatch]);
 
   function handleFormSubmit(e){
