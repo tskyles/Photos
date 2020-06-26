@@ -23,6 +23,7 @@ function login(type, creds){
   
   const requestOptions = {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -34,10 +35,10 @@ function login(type, creds){
   return fetch(`${process.env.REACT_APP_BACKEND_URI}/signin/${type.toLowerCase()}`, requestOptions)
     .then(handleResponse)
     .then(user => {
-      cookie.save('user', user.token, {
-        path: '/',
-        maxAge: 31556952
-      });
+      // cookie.save('user', user.token, {
+      //   path: '/',
+      //   maxAge: 31556952
+      // });
       return user;
     })
     .catch(error => {
@@ -55,6 +56,7 @@ function register(userData){
   console.log(userData);
   const requestOptions = {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',

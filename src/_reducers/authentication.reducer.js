@@ -3,24 +3,24 @@ import cookie from 'react-cookies';
 
 import { userConstants } from '../_constants';
 
-const token = cookie.load('user', );
-const user = token ? jwt.verify(token, process.env.REACT_APP_SECRET) : null;
+// const token = cookie.load('user', );
+// const user = token ? jwt.verify(token, process.env.REACT_APP_SECRET) : null;
 
 const initialState = (user) => {
-  if (user) {
-    return {
-      loggedIn: true,
-      user: user,
-      token: token,
-    }
-  }
-  else {
-    return {};
-  }
+  // if (user) {
+  //   return {
+  //     loggedIn: true,
+  //     user: user,
+  //     token: token,
+  //   }
+  // }
+  // else {
+  //   return {};
+  // }
 }
 
 
-export function authentication(state = initialState(user), action){
+export function authentication(state = {}, action){
   switch(action.type){
     case userConstants.LOGIN_REQUEST:
       return {

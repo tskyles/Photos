@@ -9,7 +9,27 @@ import { Route } from 'react-router-dom';
 function App() {
   const loggedIn = useSelector(state => state.authentication.loggedIn);
 
-  useEffect(() => {}, [loggedIn])
+  function checkLoggedIn() {
+    return fetch(`${process.env.REACT_APP_BACKEND_URI}/signin`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: undefined,
+    })
+      .then(response => {
+        console.log(response);
+      })
+  }
+
+  useEffect(() => {
+    console.log('got here');
+    console.log('cookies', document.cookie)
+
+    checkLoggedIn();
+  })
 
 
   return (
