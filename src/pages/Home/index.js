@@ -7,12 +7,10 @@ import { collectionsActions } from '../../_actions';
 
 function Home(props){
   const dispatch = useDispatch();
-
-  const token = useSelector(state => state.authentication.token);
   const user_id = useSelector(state => state.authentication.user._id);
 
   useEffect(() => {
-    dispatch(collectionsActions.getCollections(user_id, token));
+    dispatch(collectionsActions.getCollections(user_id));
   })
 
   function handleSubmit(e) {

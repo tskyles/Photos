@@ -1,10 +1,4 @@
-import jwt from 'jsonwebtoken';
-import cookie from 'react-cookies';
-
 import { userConstants } from '../_constants';
-
-// const token = cookie.load('user', );
-// const user = token ? jwt.verify(token, process.env.REACT_APP_SECRET) : null;
 
 const initialState = {
   loggedIn: false,
@@ -12,7 +6,7 @@ const initialState = {
 }
 
 
-export function authentication(state = {}, action){
+export function authentication(state = initialState, action){
   console.log(action);
   switch(action.type){
     case userConstants.LOGIN_REQUEST:

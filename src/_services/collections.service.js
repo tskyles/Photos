@@ -5,13 +5,13 @@ export const collectionsService = {
   getCollections,
 }
 
-function createCollection(collectionData, bearerToken){
+function createCollection(collectionData){
   const requestOptions = {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${bearerToken}`,
     },
     body: JSON.stringify(collectionData),
   };
@@ -24,13 +24,13 @@ function createCollection(collectionData, bearerToken){
     });
 }
 
-function getCollections(userID, bearerToken) {
+function getCollections(userID) {
   const requestOptions = {
     method: 'GET',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${bearerToken}`,
     },
     body: undefined,
   };

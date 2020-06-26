@@ -28,11 +28,11 @@ function createCollection(collectionData, bearerToken){
   function failure(collection) { return { type: collectionsConstants.CREATE_FAILURE, collection } };
 }
 
-function getCollections(userID, bearerToken){
+function getCollections(userID){
   return dispatch => {
     dispatch(request([]));
 
-    collectionsService.getCollections(userID, bearerToken)
+    collectionsService.getCollections(userID)
       .then(
         collections => {
           dispatch(success(collections))

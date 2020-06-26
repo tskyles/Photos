@@ -5,14 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import {If, Then, Else, When} from '../../_components/util';
 import Home from '../Home';
 import { Route } from 'react-router-dom';
-import { handleResponse } from '../../_helpers';
 import { userActions } from '../../_actions';
 
 function App() {
   const dispatch = useDispatch();
 
   const auth = useSelector(state => state.authentication);
-  const user = useSelector(state => state.authentication.user)
 
 
   useEffect(() => {

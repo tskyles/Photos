@@ -1,4 +1,3 @@
-import cookie from 'react-cookies';
 import {handleResponse} from '../_helpers';
 
 export const userService = {
@@ -48,7 +47,6 @@ function login(type, creds){
     });
 };
 
-// remove user from local storage and logout
 function logout(){
   return fetch(`${ process.env.REACT_APP_BACKEND_URI }/logout`, {
     method: 'GET',
