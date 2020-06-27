@@ -1,19 +1,21 @@
 import 'styled-components/macro';
 import React, {useState, useEffect} from 'react';
-import { Flexbox, PlusButton, Input, Button, SideBarMenu, H3 } from '../..';
+import { Flexbox, PlusButton, Input, Button, SideBarMenu, H3, Modal } from '../..';
 import { If, Then } from '../../util';
 import { useDispatch, useSelector } from 'react-redux';
-import { collectionsActions } from '../../../_actions';
+import { collectionsActions, modalActions } from '../../../_actions';
 
 function CollectionsSidebar(){
   const dispatch = useDispatch();
 
   const userID = useSelector(state => state.authentication.user._id);
+  const modal = useSelector(state => state.modal);
 
   const [submitted, setSubmitted] = useState(false);
   const [createCollection, setCreateCollection] = useState(false);
   const [checked, setChecked] = useState(true);
-  const [name, setName] = useState('')
+  const [name, setName] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   function handleClick(e){
     e.preventDefault();
@@ -51,6 +53,14 @@ function CollectionsSidebar(){
     setChecked(!checked);
   }
 
+  function handleShowModal(){
+    dispatch(modalActions.showModal());
+  }
+
+  function handleCloseModal() {
+    dispatch(modalActions.hideModal());
+  }
+
   return (
     <Flexbox 
       css={`
@@ -83,43 +93,50 @@ function CollectionsSidebar(){
               font-size: .75em;
             `}
             href={'#0'}
-            onClick={handleClick}>Edit</a>
+            onClick={handleShowModal}>Edit</a>
         </Flexbox>
         <SideBarMenu />
-        <If condition={createCollection}>
-          <Then>
-            <form onSubmit={handleFormSubmit}>
-              <Flexbox 
-                css={`
+        <Modal
+          show={modal.show}
+          close={handleCloseModal}
+          closeByOutside={true}
+          >
+          <form onSubmit={handleFormSubmit}>
+            <Flexbox
+              css={`
                   flex-direction: column;
                   align-items: flex-start;
                   `}>
+              <Input
+                placeholder='Name'
+                name='name'
+                onChange={handleInputChange}
+                type='text'
+                value={name}
+                css={``} />
+              <label>
+                Private?
                 <Input
-                  placeholder='Name'
-                  name='name'
-                  onChange={handleInputChange}
-                  type='text'
-                  value={name}
+                  name='privateView'
+                  type='checkbox'
+                  checked={checked}
+                  onChange={handleCheckbox}
                   css={``} />
-                <label>
-                  Private?
-                <Input
-                    name='privateView'
-                    type='checkbox'
-                    checked={checked}
-                    onChange={handleCheckbox}
-                    css={``} />
-                </label>
-                <Button 
-                  css={`
+              </label>
+              <Button
+                css={`
                     width: 100px;
                     height: 30px;
                     font-weight: bold;
-                  `}>CREATE</Button>
-              </Flexbox>
-            </form>
+                    `}>CREATE</Button>
+            </Flexbox>
+          </form>
+        </Modal>
+        {/* <If condition={createCollection}>
+          <Then>
+            
           </Then>
-        </If>
+        </If> */}
       </Flexbox>
     </Flexbox>
   )

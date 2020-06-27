@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import Landing from '../Landing';
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
-import {If, Then, Else, When} from '../../_components/util';
+import { When} from '../../_components/util';
 import Home from '../Home';
 import { Route } from 'react-router-dom';
 import { userActions } from '../../_actions';
@@ -11,8 +11,9 @@ import Loading from '../Loading';
 function App() {
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
+
   const auth = useSelector(state => state.authentication);
-  const user = useSelector(state => state.authentication.user);
+
 
   const checkLogin = useCallback(() => {
     if (!checked) {
@@ -20,6 +21,7 @@ function App() {
       setChecked(true);
     }
   }, [checked, dispatch])
+
 
   useEffect(() => {
     checkLogin();
@@ -29,6 +31,7 @@ function App() {
   return (
     <Route path='/' exact={true}>
       <div className="App">
+
         <When condition={auth.loggingIn}>
           <Loading />
         </When>
