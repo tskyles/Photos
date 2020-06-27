@@ -1,6 +1,6 @@
 import 'styled-components/macro';
 import React, {useState, useEffect} from 'react';
-import { Flexbox, PlusButton, Input, Button, SideBarMenu } from '../..';
+import { Flexbox, PlusButton, Input, Button, SideBarMenu, H3 } from '../..';
 import { If, Then } from '../../util';
 import { useDispatch, useSelector } from 'react-redux';
 import { collectionsActions } from '../../../_actions';
@@ -44,7 +44,6 @@ function CollectionsSidebar(){
   }
 
   useEffect(() => {
-    console.log(userID)
     dispatch(collectionsActions.getCollections(userID))
   }, [dispatch, userID])
 
@@ -53,34 +52,34 @@ function CollectionsSidebar(){
   }
 
   return (
-    <Flexbox css={`
-      position: fixed;
-      left: 0;
-      top: 10%;
-      z-index: 999;
-      flex-direction: column;
-      width: 24%;
-      justify-content: flex-start;
-      align-items: flex-end;
-    `}>
+    <Flexbox 
+      css={`
+        position: fixed;
+        left: 0;
+        top: 10%;
+        z-index: 999;
+        flex-direction: column;
+        width: 24%;
+        justify-content: flex-start;
+        align-items: flex-end;
+      `}>
       <Flexbox 
         css={`
-          width: 40%;
-          flex-direction: column;       background-color: #ffffff;
-          // white-space: nowrap;
-          // overflow: hidden;
-          // text-overflow: ellipsis;
+          width: 30%;
+          flex-direction: column;
+          // background-color: #ffffff;
           `}>
-        <h3>My Collections</h3>
+        <H3>Collections</H3>
         <SideBarMenu />
         <PlusButton onClick={handleClick} text='Create New' />
         <If condition={createCollection}>
           <Then>
             <form onSubmit={handleFormSubmit}>
-              <Flexbox css={`
-            flex-direction: column;
-            align-items: flex-start;
-            `}>
+              <Flexbox 
+                css={`
+                  flex-direction: column;
+                  align-items: flex-start;
+                  `}>
                 <Input
                   placeholder='Name'
                   name='name'
@@ -97,11 +96,12 @@ function CollectionsSidebar(){
                     onChange={handleCheckbox}
                     css={``} />
                 </label>
-                <Button css={`
-                width: 100px;
-                height: 30px;
-                font-weight: bold;
-              `}>CREATE</Button>
+                <Button 
+                  css={`
+                    width: 100px;
+                    height: 30px;
+                    font-weight: bold;
+                  `}>CREATE</Button>
               </Flexbox>
             </form>
           </Then>
