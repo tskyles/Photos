@@ -65,13 +65,27 @@ function CollectionsSidebar(){
       `}>
       <Flexbox 
         css={`
-          width: 30%;
+          width: 35%;
           flex-direction: column;
           // background-color: #ffffff;
           `}>
-        <H3>Collections</H3>
+        <Flexbox
+          css={`
+          width: 100%;
+            justify-content: space-between;
+          `}>
+          <H3
+            css={`
+              font-size: .75em;
+            `}>Collections</H3>
+          <a
+            css={`
+              font-size: .75em;
+            `}
+            href={'#0'}
+            onClick={handleClick}>Edit</a>
+        </Flexbox>
         <SideBarMenu />
-        <PlusButton onClick={handleClick} text='Create New' />
         <If condition={createCollection}>
           <Then>
             <form onSubmit={handleFormSubmit}>
