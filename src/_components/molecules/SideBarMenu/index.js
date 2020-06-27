@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import  { useSelector } from 'react-redux';
+import 'styled-components/macro';
 
 function List(props){
   const [collections, setCollections] = useState([]);
@@ -10,9 +11,23 @@ function List(props){
   }, [collectionState, collections])
 
   return(
-    <ul>
+    <ul 
+      css={`
+        width: calc(100%);
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        list-style-position: inside;
+      `}>
       {collections.map((item, idx) => (
-        <li key={idx}>{item.name}</li>
+        <li 
+          css={`
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          `} 
+          key={idx}
+          >{item.name}</li>
       ))}
     </ul>
   )

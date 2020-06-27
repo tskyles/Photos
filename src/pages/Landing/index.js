@@ -8,9 +8,9 @@ function Landing(props){
     <>
       <Flexbox css={`
         background-color: #ffffff;
-        height: 10vh;
+        height: 7.5%;
         justify-content: flex-end;
-        padding: 0 25vw;
+        padding: 0 25%;
       `}>
         <h1 css={`
           margin-right: auto;
@@ -22,8 +22,8 @@ function Landing(props){
 
       <Flexbox css={`
         justify-content: flex-end;
-        height: 80vh;
-        padding: 0 25vw;
+        height: 82.5%;
+        padding: 0 25%;
       `}>
         <Flexbox css={`
           flex-direction: column;
@@ -38,9 +38,9 @@ function Landing(props){
       
       <Flexbox css={`
         background-color: #ffffff;
-        height: 10vh;
+        height: 10%;
         justify-content: flex-end;
-        padding: 0 25vw;
+        padding: 0 25%;
       `}>
       </Flexbox>
     </>

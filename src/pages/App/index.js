@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Landing from '../Landing';
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,19 +12,18 @@ function App() {
   const dispatch = useDispatch();
   const [checked, setChecked] = useState(false);
   const auth = useSelector(state => state.authentication);
+  const user = useSelector(state => state.authentication.user);
 
-
+  const checkLogin = useCallback(() => {
+    if (!checked) {
+      dispatch(userActions.checkIfLoggedIn());
+      setChecked(true);
+    }
+  }, [checked, dispatch])
 
   useEffect(() => {
-    function checkLogin() {
-      if(!checked){
-        dispatch(userActions.checkIfLoggedIn());
-        setChecked(true);
-      }
-      return;
-    }
     checkLogin();
-  }, [dispatch, checked])
+  })
 
 
   return (

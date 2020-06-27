@@ -1,15 +1,14 @@
 import 'styled-components/macro';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Flexbox, PlusButton, Input, Button, SideBarMenu } from '../..';
 import { If, Then } from '../../util';
 import { useDispatch, useSelector } from 'react-redux';
 import { collectionsActions } from '../../../_actions';
 
-function CollectionsSidebar(props){
+function CollectionsSidebar(){
   const dispatch = useDispatch();
 
-  const token = useSelector(state => state.authentication.token);
-  const user_id = useSelector(state => state.authentication.user._id);
+  const userID = useSelector(state => state.authentication.user._id);
 
   const [submitted, setSubmitted] = useState(false);
   const [createCollection, setCreateCollection] = useState(false);
@@ -33,16 +32,21 @@ function CollectionsSidebar(props){
     const data = {
       name: name,
       private_only: true,
-      created_by: user_id,
+      created_by: userID,
       // create additional input to add to the users field
-      users: [user_id]
+      users: [userID]
     }
 
     if (data.name){
-      dispatch(collectionsActions.createCollection(data, token))
+      dispatch(collectionsActions.createCollection(data))
       setCreateCollection(false);
     }
   }
+
+  useEffect(() => {
+    console.log(userID)
+    dispatch(collectionsActions.getCollections(userID))
+  }, [dispatch, userID])
 
   function handleCheckbox(){
     setChecked(!checked);
@@ -52,14 +56,21 @@ function CollectionsSidebar(props){
     <Flexbox css={`
       position: fixed;
       left: 0;
-      top: 10vh;
+      top: 10%;
       z-index: 999;
       flex-direction: column;
       width: 24%;
       justify-content: flex-start;
       align-items: flex-end;
     `}>
-      <Flexbox css={`flex-direction: column;       background-color: #ffffff;`}>
+      <Flexbox 
+        css={`
+          width: 40%;
+          flex-direction: column;       background-color: #ffffff;
+          // white-space: nowrap;
+          // overflow: hidden;
+          // text-overflow: ellipsis;
+          `}>
         <h3>My Collections</h3>
         <SideBarMenu />
         <PlusButton onClick={handleClick} text='Create New' />

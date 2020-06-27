@@ -37,7 +37,11 @@ export function collections(state = initialState, action){
         collections: action.collections,
       };
     case collectionsConstants.GET_ALL_FAILURE:
-      return {...state};
+      return {
+        ...state,
+        fetchingCollections: false,
+        fetchedCollections: false,
+      };
     default:
        return state;
   }
